@@ -10,12 +10,14 @@ import org.ncmmis.batch.provider.entity.Provider;
 import org.ncmmis.batch.provider.entity.ProviderDao;
 import org.ncmmis.batch.provider.entity.ProviderFieldSetMapper;
 import org.ncmmis.batch.provider.entity.ProviderItemWriter;
+import org.ncmmis.batch.provider.entity.ProviderLoadItemProcessor;
 import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.job.parameters.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.Step;
 import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.batch.infrastructure.item.ItemProcessor;
 import org.springframework.batch.infrastructure.item.file.FlatFileItemReader;
 import org.springframework.batch.infrastructure.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,11 +49,12 @@ public class ProviderJob2 extends JobConfig {
 	
 	@Bean
 	Step providerLoad(JobRepository jobRepository, JdbcTransactionManager transactionManager,
-		FlatFileItemReader<Provider> providerFileItemReader, ProviderItemWriter providerItemWriter) {	
+			DataSource dataSource) {	
 		return new StepBuilder("providerLoad", jobRepository).<Provider, Provider>chunk(100)
 			.transactionManager(transactionManager)
-			.reader(providerFileItemReader)
-			.writer(providerItemWriter)
+			.reader(providerFileItemReader())
+			.processor(providerLoadItemProcessor())
+			.writer(providerItemWriter(dataSource))
 			.listener(customStepExecutionListener)
 			.listener(customChunkListener)
 			.build();
@@ -66,6 +69,11 @@ public class ProviderJob2 extends JobConfig {
 			.names("id", "npi", "lastName", "firstName", "ssn", "email")
 			.fieldSetMapper(new ProviderFieldSetMapper())
 			.build();
+	}
+	
+	@Bean
+	ItemProcessor<Provider, Provider> providerLoadItemProcessor() {
+		return new ProviderLoadItemProcessor();
 	}
 
 	@Bean
