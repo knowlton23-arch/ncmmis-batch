@@ -34,7 +34,7 @@ public class ProviderJob2Tests {
 		assertEquals(1, jobExecution.getStepExecutions().size());
 		assertEquals(BatchStatus.COMPLETED, jobExecution.getStepExecutions().iterator().next().getStatus());
 		
-		int count = JdbcTestUtils.countRowsInTable(new JdbcTemplate(context.getBean(DataSource.class)), "mmis_provider");
+		int count = JdbcTestUtils.countRowsInTable(new JdbcTemplate(context.getBean(DataSource.class)), "ncmmis_provider");
 		assertTrue(count > 0);
 	}
 }
