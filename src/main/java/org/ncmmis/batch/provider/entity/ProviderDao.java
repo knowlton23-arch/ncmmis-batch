@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 public class ProviderDao {
 
-	public static final String INSERT_PROVIDER = "insert into mmis_provider (id, npi, last_name, first_name, ssn, email)"
+	public static final String INSERT_PROVIDER = "insert into ncmmis_provider (id, npi, last_name, first_name, ssn, email)"
 			+ " values (:id, :npi, :lastName, :firstName, :ssn, :email)";
 
 	private NamedParameterJdbcOperations namedParameterJdbcTemplate;
