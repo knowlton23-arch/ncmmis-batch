@@ -1,16 +1,12 @@
-package org.ncmmis.batch.provider.job;
+package org.ncmmis.batch.provider.job2;
 
 import javax.sql.DataSource;
 
 import org.ncmmis.batch.common.CustomChunkListener;
 import org.ncmmis.batch.common.CustomJobExecutionListener;
 import org.ncmmis.batch.common.CustomStepExecutionListener;
-import org.ncmmis.batch.config.JobConfig;
+import org.ncmmis.batch.config.BatchInfrastructureConfig;
 import org.ncmmis.batch.provider.entity.Provider;
-import org.ncmmis.batch.provider.entity.ProviderDao;
-import org.ncmmis.batch.provider.entity.ProviderFieldSetMapper;
-import org.ncmmis.batch.provider.entity.ProviderItemWriter;
-import org.ncmmis.batch.provider.entity.ProviderLoadItemProcessor;
 import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.job.parameters.RunIdIncrementer;
@@ -18,16 +14,25 @@ import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.Step;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.infrastructure.item.ItemProcessor;
+import org.springframework.batch.infrastructure.item.ItemReader;
+import org.springframework.batch.infrastructure.item.ItemWriter;
+import org.springframework.batch.infrastructure.item.database.JdbcBatchItemWriter;
+import org.springframework.batch.infrastructure.item.database.builder.JdbcBatchItemWriterBuilder;
 import org.springframework.batch.infrastructure.item.file.FlatFileItemReader;
 import org.springframework.batch.infrastructure.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.support.JdbcTransactionManager;
 
 @Configuration
-public class ProviderJob2 extends JobConfig {
+@Import(BatchInfrastructureConfig.class)
+@PropertySource("classpath:sql/provider-sql.properties")
+public class ProviderJob2 {
 	
 	@Autowired
 	private CustomJobExecutionListener customJobExecutionListener;
@@ -48,13 +53,18 @@ public class ProviderJob2 extends JobConfig {
 	}
 	
 	@Bean
-	Step providerLoad(JobRepository jobRepository, JdbcTransactionManager transactionManager,
-			DataSource dataSource) {	
+	Step providerLoad(
+			JobRepository jobRepository, 
+			JdbcTransactionManager transactionManager,
+	        ItemReader<Provider> providerFileItemReader,
+	        ItemProcessor<Provider, Provider> providerLoadItemProcessor,
+	        ItemWriter<Provider> providerItemWriter) {	
+		
 		return new StepBuilder("providerLoad", jobRepository).<Provider, Provider>chunk(100)
 			.transactionManager(transactionManager)
-			.reader(providerFileItemReader())
-			.processor(providerLoadItemProcessor())
-			.writer(providerItemWriter(dataSource))
+			.reader(providerFileItemReader)
+			.processor(providerLoadItemProcessor)
+			.writer(providerItemWriter)
 			.listener(customStepExecutionListener)
 			.listener(customChunkListener)
 			.build();
@@ -75,14 +85,13 @@ public class ProviderJob2 extends JobConfig {
 	ItemProcessor<Provider, Provider> providerLoadItemProcessor() {
 		return new ProviderLoadItemProcessor();
 	}
-
-	@Bean
-	ProviderItemWriter providerItemWriter(DataSource dataSource) {
-		ProviderItemWriter providerItemWriter = new ProviderItemWriter();
-		ProviderDao providerDao = new ProviderDao();
-		providerDao.setDataSource(dataSource);
-		providerItemWriter.setProviderDao(providerDao);
-		return providerItemWriter;
-	}
 	
+	@Bean
+	JdbcBatchItemWriter<Provider> providerItemWriter(DataSource dataSource, @Value("${provider.insert}") String sql) {
+	    return new JdbcBatchItemWriterBuilder<Provider>()
+	        .dataSource(dataSource)
+	        .sql(sql)
+	        .beanMapped()
+	        .build();
+	}
 }

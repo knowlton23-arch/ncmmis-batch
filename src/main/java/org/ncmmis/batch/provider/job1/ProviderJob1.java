@@ -1,6 +1,6 @@
-package org.ncmmis.batch.provider.job;
+package org.ncmmis.batch.provider.job1;
 
-import org.ncmmis.batch.config.JobConfig;
+import org.ncmmis.batch.config.BatchInfrastructureConfig;
 import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.job.parameters.RunIdIncrementer;
@@ -10,9 +10,11 @@ import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.infrastructure.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 @Configuration
-public class ProviderJob1 extends JobConfig {
+@Import(BatchInfrastructureConfig.class)
+public class ProviderJob1 {
 	
 	@Bean
 	Job job1(JobRepository jobRepository, Step job1Step1) {

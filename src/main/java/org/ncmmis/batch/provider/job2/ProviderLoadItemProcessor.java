@@ -1,5 +1,6 @@
-package org.ncmmis.batch.provider.entity;
+package org.ncmmis.batch.provider.job2;
 
+import org.ncmmis.batch.provider.entity.Provider;
 import org.springframework.batch.infrastructure.item.ItemProcessor;
 
 public class ProviderLoadItemProcessor implements ItemProcessor<Provider, Provider> {
@@ -7,7 +8,7 @@ public class ProviderLoadItemProcessor implements ItemProcessor<Provider, Provid
 	@Override
 	public Provider process(Provider provider) throws Exception {
 	
-		System.out.println("Processing provider id: " + provider.getId());
+		// System.out.println("Processing provider id: " + provider.getId());
 		return provider;
 	}
 }

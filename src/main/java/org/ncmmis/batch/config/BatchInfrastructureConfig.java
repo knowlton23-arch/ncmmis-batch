@@ -6,19 +6,19 @@ import org.springframework.batch.core.configuration.annotation.EnableJdbcJobRepo
 import org.springframework.batch.core.configuration.support.MapJobRegistry;
 import org.springframework.batch.core.launch.support.JobOperatorFactoryBean;
 import org.springframework.batch.core.repository.JobRepository;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@EnableAutoConfiguration
 @EnableBatchProcessing
 @EnableJdbcJobRepository
-@ComponentScan(basePackages = {"org.ncmmis.batch.common", "org.ncmmis.batch.config"})
+@Import(DataSourceConfig.class)
+@ComponentScan("org.ncmmis.batch.common")
 @PropertySource("classpath:application.properties")
-public class JobConfig {
+public class BatchInfrastructureConfig {
 
 	@Bean
     JobRegistry jobRegistry() {
@@ -31,5 +31,17 @@ public class JobConfig {
 		jobOperatorFactoryBean.setJobRepository(jobRepository);
 		return jobOperatorFactoryBean;
 	}
+	
+//  @Bean
+//  public JobParametersConverter jobParametersConverter() {
+//      // Implement this interface for adding CommandLineJobOperator params dynamically
+//      return new MyCustomJobParametersConverter(); 
+//  }
+	
+//	@Bean
+//	public ExitCodeMapper exitCodeMapper() {
+//		// Implement this interface for adding CommandLineJobOperator exit codes > 2
+//		return new MyCustomExitCodeMapper();
+//	}
 	
 }
