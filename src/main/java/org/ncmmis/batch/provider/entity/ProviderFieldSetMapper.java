@@ -1,7 +1,6 @@
-package org.ncmmis.batch.provider.job2;
+package org.ncmmis.batch.provider.entity;
 
 import org.jspecify.annotations.Nullable;
-import org.ncmmis.batch.provider.entity.Provider;
 import org.springframework.batch.infrastructure.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.infrastructure.item.file.transform.FieldSet;
 

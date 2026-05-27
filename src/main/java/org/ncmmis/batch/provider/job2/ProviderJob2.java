@@ -7,6 +7,7 @@ import org.ncmmis.batch.common.CustomJobExecutionListener;
 import org.ncmmis.batch.common.CustomStepExecutionListener;
 import org.ncmmis.batch.config.BatchInfrastructureConfig;
 import org.ncmmis.batch.provider.entity.Provider;
+import org.ncmmis.batch.provider.entity.ProviderFieldSetMapper;
 import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.job.parameters.RunIdIncrementer;
@@ -20,7 +21,6 @@ import org.springframework.batch.infrastructure.item.database.JdbcBatchItemWrite
 import org.springframework.batch.infrastructure.item.database.builder.JdbcBatchItemWriterBuilder;
 import org.springframework.batch.infrastructure.item.file.FlatFileItemReader;
 import org.springframework.batch.infrastructure.item.file.builder.FlatFileItemReaderBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,17 +34,12 @@ import org.springframework.jdbc.support.JdbcTransactionManager;
 @PropertySource("classpath:sql/provider-sql.properties")
 public class ProviderJob2 {
 	
-	@Autowired
-	private CustomJobExecutionListener customJobExecutionListener;
-	
-	@Autowired
-	private CustomStepExecutionListener customStepExecutionListener;
-	
-	@Autowired
-	private CustomChunkListener<Provider, Provider> customChunkListener;
-	
 	@Bean
-	Job job2(JobRepository jobRepository, Step providerLoad) {
+	Job job2(
+			JobRepository jobRepository, 
+			Step providerLoad,
+			CustomJobExecutionListener customJobExecutionListener) {
+		
 		return new JobBuilder(jobRepository)
 				.start(providerLoad)
 				.incrementer(new RunIdIncrementer())
@@ -58,7 +53,9 @@ public class ProviderJob2 {
 			JdbcTransactionManager transactionManager,
 	        ItemReader<Provider> providerFileItemReader,
 	        ItemProcessor<Provider, Provider> providerLoadItemProcessor,
-	        ItemWriter<Provider> providerItemWriter) {	
+	        ItemWriter<Provider> providerItemWriter,
+	        CustomStepExecutionListener customStepExecutionListener,
+	        CustomChunkListener<Provider, Provider> customChunkListener) {	
 		
 		return new StepBuilder("providerLoad", jobRepository).<Provider, Provider>chunk(100)
 			.transactionManager(transactionManager)
