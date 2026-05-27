@@ -1,4 +1,4 @@
-package org.ncmmis.batch.provider.job2;
+package org.ncmmis.batch.provider.job.job2;
 
 import javax.sql.DataSource;
 
@@ -84,7 +84,10 @@ public class ProviderJob2 {
 	}
 	
 	@Bean
-	JdbcBatchItemWriter<Provider> providerItemWriter(DataSource dataSource, @Value("${provider.insert}") String sql) {
+	JdbcBatchItemWriter<Provider> providerItemWriter(
+			DataSource dataSource, 
+			@Value("${provider.insert}") String sql) {
+		
 	    return new JdbcBatchItemWriterBuilder<Provider>()
 	        .dataSource(dataSource)
 	        .sql(sql)

@@ -1,4 +1,4 @@
-package org.ncmmis.batch.provider.job2;
+package org.ncmmis.batch.provider.job.job2;
 
 import org.ncmmis.batch.provider.entity.Provider;
 import org.springframework.batch.infrastructure.item.ItemProcessor;

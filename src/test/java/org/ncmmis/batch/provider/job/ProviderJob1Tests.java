@@ -3,7 +3,7 @@ package org.ncmmis.batch.provider.job;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-import org.ncmmis.batch.provider.job1.ProviderJob1;
+import org.ncmmis.batch.provider.job.job1.ProviderJob1;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.JobExecution;

@@ -1,4 +1,4 @@
-package org.ncmmis.batch.provider.job1;
+package org.ncmmis.batch.provider.job.job1;
 
 import org.ncmmis.batch.config.BatchInfrastructureConfig;
 import org.springframework.batch.core.job.Job;

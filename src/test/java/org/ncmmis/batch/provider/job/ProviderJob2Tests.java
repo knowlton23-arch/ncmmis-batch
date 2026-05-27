@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import javax.sql.DataSource;
 
 import org.junit.jupiter.api.Test;
-import org.ncmmis.batch.provider.job2.ProviderJob2;
+import org.ncmmis.batch.provider.job.job2.ProviderJob2;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.JobExecution;
