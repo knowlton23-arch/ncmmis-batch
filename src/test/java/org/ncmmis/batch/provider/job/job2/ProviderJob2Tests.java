@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import javax.sql.DataSource;
 
 import org.junit.jupiter.api.Test;
+import org.ncmmis.batch.config.TestDataSourceConfig;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.JobExecution;
@@ -13,11 +14,19 @@ import org.springframework.batch.core.launch.JobOperator;
 import org.springframework.batch.test.context.SpringBatchTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.jdbc.JdbcTestUtils;
 
 @SpringBatchTest
-@SpringJUnitConfig(ProviderJob2.class)
+@SpringJUnitConfig({
+    ProviderJob2.class,
+    TestDataSourceConfig.class
+})
+@Sql(scripts = {
+    "/sql/schemas/schema-batch-h2.sql",
+    "/sql/schemas/schema-provider-h2.sql"
+})
 public class ProviderJob2Tests {
 	
     private final JobOperator jobOperator;
