@@ -12,7 +12,9 @@ The project is currently in the prototype (instructional, bootstrap) stage and w
 
 ## Application Flow
 
-The runtime entry point is Spring Batch’s CommandLineJobOperator, not a normal long-running Spring Boot app.
+Note that this is not a normal long-running Spring Boot app.
+
+The runtime entry point is Spring Batch’s CommandLineJobOperator.
 
 The Maven Spring Boot plugin explicitly sets the executable main class to org.springframework.batch.core.launch.support.CommandLineJobOperator in pom.xml.
 
