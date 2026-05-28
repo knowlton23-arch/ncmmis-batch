@@ -34,7 +34,10 @@ public class ProviderJob2Tests {
 	@Test
 	public void testLaunchJob2() throws Exception {
 		
-		deleteProviderData();
+		deleteTableData("ncmmis_provider");		
+		
+        int countAfterDelete = JdbcTestUtils.countRowsInTable(jdbcTemplate, "ncmmis_provider");
+        assertEquals(0, countAfterDelete);
 
         JobExecution jobExecution = jobOperator.start(job, new JobParameters());
 
@@ -44,14 +47,11 @@ public class ProviderJob2Tests {
 
         int countAfterInsert = JdbcTestUtils.countRowsInTable(jdbcTemplate, "ncmmis_provider");
         assertEquals(1000, countAfterInsert);
-		
 	}
 	
-	private void deleteProviderData() {
-		
-        JdbcTestUtils.deleteFromTables(jdbcTemplate, "ncmmis_provider");
-        
-        int countAfterDelete = JdbcTestUtils.countRowsInTable(jdbcTemplate, "ncmmis_provider");
+	private void deleteTableData(String tableName) {		
+        JdbcTestUtils.deleteFromTables(jdbcTemplate, tableName);       
+        int countAfterDelete = JdbcTestUtils.countRowsInTable(jdbcTemplate, tableName);
         assertEquals(0, countAfterDelete);
 	}
 }
