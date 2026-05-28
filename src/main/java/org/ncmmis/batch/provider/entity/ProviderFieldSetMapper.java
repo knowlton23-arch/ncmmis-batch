@@ -15,7 +15,7 @@ public class ProviderFieldSetMapper implements FieldSetMapper<Provider> {
 
 		Provider provider = new Provider();
 		provider.setId(fs.readInt("id"));
-		provider.setNpi(fs.readInt("npi"));
+		provider.setNpi(fs.readLong("npi"));
 		provider.setLastName(fs.readString("lastName"));
 		provider.setFirstName(fs.readString("firstName"));
 		provider.setSsn(fs.readString("ssn"));

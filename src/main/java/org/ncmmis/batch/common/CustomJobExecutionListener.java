@@ -18,5 +18,4 @@ public class CustomJobExecutionListener implements JobExecutionListener {
 		System.out.println(">> After job");
 		System.out.println(">> Job Execution Context: " + jobExecution.getExecutionContext().toString());
 	}
-	
 }

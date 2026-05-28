@@ -24,5 +24,5 @@ The intended command shape is as follows:
 
 For example:
 
-`java -jar ncmmis-batch-1.0.jar org.ncmmis.batch.provider.job.ProviderJob1 start job1 name=Jeff,java.lang.String`
+`java -jar ncmmis-batch-1.0.jar org.ncmmis.batch.provider.job.job1.ProviderJob1 start job1 name=Jeff,java.lang.String`
 

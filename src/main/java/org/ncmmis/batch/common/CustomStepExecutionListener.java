@@ -17,6 +17,6 @@ public class CustomStepExecutionListener implements StepExecutionListener {
     public ExitStatus afterStep(StepExecution stepExecution) {
 		System.out.println(">> After step");
 		System.out.println(">> Step Summary: " + stepExecution.getSummary().toString());
-		return new ExitStatus("");
+		return stepExecution.getExitStatus();
 	}
 }

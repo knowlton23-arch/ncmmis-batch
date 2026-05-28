@@ -6,7 +6,7 @@ import java.io.Serializable;
 public class Provider implements Serializable {
 	
 	private int id;
-	private int npi;
+	private long npi;
 	private String lastName;
 	private String firstName;
 	private String ssn;
@@ -21,7 +21,7 @@ public class Provider implements Serializable {
 		return id;
 	}	
 	
-	public int getNpi() {
+	public long getNpi() {
 		return npi;
 	}
 
@@ -53,7 +53,7 @@ public class Provider implements Serializable {
 		this.firstName = firstName;
 	}
 
-	public void setNpi(int npi) {
+	public void setNpi(long npi) {
 		this.npi = npi;
 	}
 
