@@ -38,12 +38,12 @@ public class ProviderJob2 {
 	Job job2(
 			JobRepository jobRepository, 
 			Step providerLoad,
-			CustomJobExecutionListener customJobExecutionListener) {
+			CustomJobExecutionListener jobExecutionListener) {
 		
 		return new JobBuilder(jobRepository)
 				.start(providerLoad)
 				.incrementer(new RunIdIncrementer())
-				.listener(customJobExecutionListener)
+				.listener(jobExecutionListener)
 				.build();
 	}
 	
@@ -51,20 +51,20 @@ public class ProviderJob2 {
 	Step providerLoad(
 			JobRepository jobRepository, 
 			JdbcTransactionManager transactionManager,
-	        ItemReader<Provider> providerFileItemReader,
-	        ItemProcessor<Provider, Provider> providerLoadItemProcessor,
-	        ItemWriter<Provider> providerItemWriter,
-	        CustomStepExecutionListener customStepExecutionListener,
-	        CustomChunkListener<Provider, Provider> customChunkListener) {	
+	        ItemReader<Provider> itemReader,
+	        ItemProcessor<Provider, Provider> itemProcessor,
+	        ItemWriter<Provider> itemWriter,
+	        CustomStepExecutionListener stepExecutionListener,
+	        CustomChunkListener<Provider, Provider> chunkListener) {	
 		
 		return new StepBuilder("providerLoad", jobRepository)
 			.<Provider, Provider>chunk(100)
 			.transactionManager(transactionManager)
-			.reader(providerFileItemReader)
-			.processor(providerLoadItemProcessor)
-			.writer(providerItemWriter)
-			.listener(customStepExecutionListener)
-			.listener(customChunkListener)
+			.reader(itemReader)
+			.processor(itemProcessor)
+			.writer(itemWriter)
+			.listener(stepExecutionListener)
+			.listener(chunkListener)
 			.build();
 	}
 

@@ -1,4 +1,4 @@
-package org.ncmmis.batch.provider.job;
+package org.ncmmis.batch.provider.job.job2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import javax.sql.DataSource;
 
 import org.junit.jupiter.api.Test;
-import org.ncmmis.batch.provider.job.job2.ProviderJob2;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.JobExecution;
