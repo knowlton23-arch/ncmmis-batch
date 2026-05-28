@@ -57,7 +57,8 @@ public class ProviderJob2 {
 	        CustomStepExecutionListener customStepExecutionListener,
 	        CustomChunkListener<Provider, Provider> customChunkListener) {	
 		
-		return new StepBuilder("providerLoad", jobRepository).<Provider, Provider>chunk(100)
+		return new StepBuilder("providerLoad", jobRepository)
+			.<Provider, Provider>chunk(100)
 			.transactionManager(transactionManager)
 			.reader(providerFileItemReader)
 			.processor(providerLoadItemProcessor)
@@ -69,11 +70,12 @@ public class ProviderJob2 {
 
 	@Bean
 	FlatFileItemReader<Provider> providerFileItemReader() {		
-		return new FlatFileItemReaderBuilder<Provider>().name("providerFileItemReader")
+		return new FlatFileItemReaderBuilder<Provider>()
+			.name("providerFileItemReader")
 			.resource(new ClassPathResource("data/input/provider/job2/providers.csv"))
-			.linesToSkip(1)
 			.delimited()
 			.names("id", "npi", "lastName", "firstName", "ssn", "email")
+			.linesToSkip(1)
 			.fieldSetMapper(new ProviderFieldSetMapper())
 			.build();
 	}
