@@ -9,4 +9,4 @@
 ## Java Conventions
 
 - Each job configuration should import BatchInfrastructureConfig
-- Prefer Java configuration with @Bean methods over XML
+- Configuration should be done using Spring @Bean Java methods rather than XML

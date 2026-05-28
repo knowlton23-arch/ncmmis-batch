@@ -2,9 +2,9 @@
 
 ## Approach
 
-Build this project incrementally using a spec-driven workflow.
-Context files define what to build, how to build it, and the current state of progress. 
-Always implement against these specs — do not infer or invent behavior from scratch.
+- Build this project incrementally using a spec-driven workflow.
+- Context files define what to build, how to build it, and the current state of progress. 
+- Always implement against these specs — do not infer or invent behavior from scratch.
 
 ## Scoping Rules
 
