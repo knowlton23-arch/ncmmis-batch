@@ -17,7 +17,8 @@ import org.springframework.context.annotation.PropertySource;
 @EnableJdbcJobRepository
 @Import(DataSourceConfig.class)
 @ComponentScan("org.ncmmis.batch.common")
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:properties/application.properties")
+@PropertySource("classpath:properties/application-${spring.profiles.active:local}.properties")
 public class BatchInfrastructureConfig {
 
 	@Bean
