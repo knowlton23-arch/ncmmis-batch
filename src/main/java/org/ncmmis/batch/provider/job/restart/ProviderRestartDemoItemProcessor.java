@@ -1,4 +1,4 @@
-package org.ncmmis.batch.provider.job.job3;
+package org.ncmmis.batch.provider.job.restart;
 
 import org.ncmmis.batch.provider.entity.Provider;
 import org.slf4j.Logger;
@@ -9,15 +9,15 @@ import org.springframework.batch.core.step.StepExecution;
 import org.springframework.batch.core.listener.StepExecutionListener;
 import org.springframework.batch.infrastructure.item.ItemProcessor;
 
-public class ProviderJob3ItemProcessor implements ItemProcessor<Provider, Provider>, StepExecutionListener {
+public class ProviderRestartDemoItemProcessor implements ItemProcessor<Provider, Provider>, StepExecutionListener {
 
-	private static final Logger log = LoggerFactory.getLogger(ProviderJob3ItemProcessor.class);
+	private static final Logger log = LoggerFactory.getLogger(ProviderRestartDemoItemProcessor.class);
 	private static final int FAILURE_PROVIDER_ID = 350;
 
 	private final JobRepository jobRepository;
 	private boolean failThisExecution;
 
-	public ProviderJob3ItemProcessor(JobRepository jobRepository) {
+	public ProviderRestartDemoItemProcessor(JobRepository jobRepository) {
 		this.jobRepository = jobRepository;
 	}
 
@@ -28,7 +28,7 @@ public class ProviderJob3ItemProcessor implements ItemProcessor<Provider, Provid
 		failThisExecution = executionCount <= 1;
 
 		log.info(
-				"ProviderJob3 restart demo: jobExecutionId={}, executionCount={}, failThisExecution={}",
+				"ProviderRestartDemoJob: jobExecutionId={}, executionCount={}, failThisExecution={}",
 				jobExecution.getId(),
 				executionCount,
 				failThisExecution);
@@ -38,7 +38,7 @@ public class ProviderJob3ItemProcessor implements ItemProcessor<Provider, Provid
 	public Provider process(Provider provider) {
 		if (failThisExecution && provider.getId() == FAILURE_PROVIDER_ID) {
 			throw new IllegalStateException(
-					"Intentional ProviderJob3 failure at provider id " + FAILURE_PROVIDER_ID);
+					"Intentional ProviderRestartDemoJob failure at provider id " + FAILURE_PROVIDER_ID);
 		}
 
 		return provider;

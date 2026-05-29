@@ -1,4 +1,4 @@
-package org.ncmmis.batch.provider.job.job1;
+package org.ncmmis.batch.provider.job.hello;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,20 +15,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 @SpringBatchTest
-@SpringJUnitConfig(ProviderJob1.class)
-public class ProviderJob1Tests {
+@SpringJUnitConfig(HelloWorldJob.class)
+public class HelloWorldJobTests {
 	
     private final JobOperator jobOperator;
     private final Job job;
 
     @Autowired
-    ProviderJob1Tests(JobOperator jobOperator, Job job, DataSource dataSource) {
+    HelloWorldJobTests(JobOperator jobOperator, Job job, DataSource dataSource) {
         this.jobOperator = jobOperator;
         this.job = job;
     }
 
 	@Test
-	public void testLaunchJob1() throws Exception {
+	public void testLaunchHelloWorldJob() throws Exception {
 		
         JobExecution jobExecution = jobOperator.start(job, new JobParameters());
 

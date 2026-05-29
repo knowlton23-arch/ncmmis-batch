@@ -28,22 +28,22 @@ The intended command shape is as follows:
 
 For example:
 
-`java -Dspring.profiles.active=local -jar ncmmis-batch-1.0.jar org.ncmmis.batch.provider.job.job1.ProviderJob1 start job1 name=Jeff,java.lang.String`
+`java -Dspring.profiles.active=local -jar ncmmis-batch-1.0.jar org.ncmmis.batch.provider.job.hello.HelloWorldJob start helloWorldJob name=Jeff,java.lang.String`
 
 
-## ProviderJob3 restart demo
+## ProviderRestartDemoJob 
 
-`ProviderJob3` is an instructional Spring Batch restartability job.
+`ProviderRestartDemoJob` is an instructional Spring Batch restartability job.
 
 It reads the provider CSV, writes to `ncmmis_provider`, intentionally fails while processing provider id `350` during the first execution, and can then be restarted from the last committed chunk.
 
 Start the job:
 
-`java -Dspring.profiles.active=local -jar target/ncmmis-batch-1.0.jar org.ncmmis.batch.provider.job.job3.ProviderJob3 start job3 demoRun=restart-demo-1,java.lang.String`
+`java -Dspring.profiles.active=local -jar target/ncmmis-batch-1.0.jar org.ncmmis.batch.provider.job.restart.ProviderRestartDemoJob start providerRestartDemoJob demoRun=restart-demo-1,java.lang.String`
 
 After the intentional failure, restart the failed execution by execution id:
 
-`java -Dspring.profiles.active=local -jar target/ncmmis-batch-1.0.jar org.ncmmis.batch.provider.job.job3.ProviderJob3 restart <job-execution-id>`
+`java -Dspring.profiles.active=local -jar target/ncmmis-batch-1.0.jar org.ncmmis.batch.provider.job.restart.ProviderRestartDemoJob restart <job-execution-id>`
 
 With the current chunk size of `100`, the first failed run should commit `300` provider rows before failing. The restart should continue from the last committed chunk and complete the remaining rows.
 

@@ -1,4 +1,4 @@
-package org.ncmmis.batch.provider.job.job3;
+package org.ncmmis.batch.provider.job.load;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -20,36 +20,37 @@ import org.springframework.test.jdbc.JdbcTestUtils;
 
 @SpringBatchTest
 @SpringJUnitConfig({
-    ProviderJob3.class,
+    ProviderLoadJob.class,
     TestDataSourceConfig.class
 })
 @Sql(scripts = {
     "/sql/schemas/schema-batch-h2.sql",
     "/sql/schemas/schema-provider-h2.sql"
 })
-public class ProviderJob3Tests {
-
+public class ProviderLoadJobTests {
+	
     private final JobOperator jobOperator;
     private final Job job;
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    ProviderJob3Tests(JobOperator jobOperator, Job job, DataSource dataSource) {
+    ProviderLoadJobTests(JobOperator jobOperator, Job job, DataSource dataSource) {
         this.jobOperator = jobOperator;
         this.job = job;
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
-
+    
 	@Test
-	public void testRestartJob3FromLastCommittedChunk() throws Exception {
-		JobExecution failedExecution = jobOperator.start(job, new JobParameters());
+	public void testLaunchProviderLoadJob() throws Exception {
 
-		assertEquals(BatchStatus.FAILED, failedExecution.getStatus());
-		assertEquals(300, JdbcTestUtils.countRowsInTable(jdbcTemplate, "ncmmis_provider"));
+        JobExecution jobExecution = jobOperator.start(job, new JobParameters());
 
-		JobExecution restartedExecution = jobOperator.restart(failedExecution);
+        assertEquals(BatchStatus.COMPLETED, jobExecution.getStatus());
+        assertEquals(1, jobExecution.getStepExecutions().size());
+        assertEquals(BatchStatus.COMPLETED, jobExecution.getStepExecutions().iterator().next().getStatus());
 
-		assertEquals(BatchStatus.COMPLETED, restartedExecution.getStatus());
-		assertEquals(1000, JdbcTestUtils.countRowsInTable(jdbcTemplate, "ncmmis_provider"));
+        int countAfterInsert = JdbcTestUtils.countRowsInTable(jdbcTemplate, "ncmmis_provider");
+        assertEquals(1000, countAfterInsert);
 	}
+
 }

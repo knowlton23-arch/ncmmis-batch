@@ -12,12 +12,13 @@ Update this file after every meaningful implementation change.
 
 ## Completed
 
-- Added `ProviderJob3` as a restartability demo job.
-- Added a focused H2-backed restart test for `ProviderJob3`.
+- Renamed the instructional jobs to semantic names: `HelloWorldJob`, `ProviderLoadJob`, and `ProviderRestartDemoJob`.
+- Added `ProviderRestartDemoJob` as a restartability demo job.
+- Added a focused H2-backed restart test for `ProviderRestartDemoJob`.
 
 ## In Progress
 
-- Validate `ProviderJob3` from Eclipse or Maven once the local Maven wrapper issue is resolved.
+- Validate `ProviderRestartDemoJob` from Eclipse or Maven once the local Maven wrapper issue is resolved.
 
 ## Next Up
 
@@ -29,9 +30,9 @@ Update this file after every meaningful implementation change.
 
 ## Architecture Decisions
 
-- `ProviderJob3` intentionally reuses `ncmmis_provider` so restart behavior is visible without adding another business table.
-- `ProviderJob3` omits `RunIdIncrementer` so a failed job instance can be restarted with the same identifying parameters.
+- `ProviderRestartDemoJob` intentionally reuses `ncmmis_provider` so restart behavior is visible without adding another business table.
+- `ProviderRestartDemoJob` omits `RunIdIncrementer` so a failed job instance can be restarted with the same identifying parameters.
 
 ## Session Notes
 
-- The first `ProviderJob3` execution fails at provider id `350`, after three chunks have committed. A restart should resume from the last committed chunk and finish the load.
+- The first `ProviderRestartDemoJob` execution fails at provider id `350`, after three chunks have committed. A restart should resume from the last committed chunk and finish the load.

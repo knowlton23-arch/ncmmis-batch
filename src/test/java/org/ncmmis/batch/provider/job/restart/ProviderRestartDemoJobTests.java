@@ -1,4 +1,4 @@
-package org.ncmmis.batch.provider.job.job2;
+package org.ncmmis.batch.provider.job.restart;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -20,37 +20,36 @@ import org.springframework.test.jdbc.JdbcTestUtils;
 
 @SpringBatchTest
 @SpringJUnitConfig({
-    ProviderJob2.class,
+    ProviderRestartDemoJob.class,
     TestDataSourceConfig.class
 })
 @Sql(scripts = {
     "/sql/schemas/schema-batch-h2.sql",
     "/sql/schemas/schema-provider-h2.sql"
 })
-public class ProviderJob2Tests {
-	
+public class ProviderRestartDemoJobTests {
+
     private final JobOperator jobOperator;
     private final Job job;
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    ProviderJob2Tests(JobOperator jobOperator, Job job, DataSource dataSource) {
+    ProviderRestartDemoJobTests(JobOperator jobOperator, Job job, DataSource dataSource) {
         this.jobOperator = jobOperator;
         this.job = job;
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
-    
+
 	@Test
-	public void testLaunchJob2() throws Exception {
+	public void testRestartProviderRestartDemoJobFromLastCommittedChunk() throws Exception {
+		JobExecution failedExecution = jobOperator.start(job, new JobParameters());
 
-        JobExecution jobExecution = jobOperator.start(job, new JobParameters());
+		assertEquals(BatchStatus.FAILED, failedExecution.getStatus());
+		assertEquals(300, JdbcTestUtils.countRowsInTable(jdbcTemplate, "ncmmis_provider"));
 
-        assertEquals(BatchStatus.COMPLETED, jobExecution.getStatus());
-        assertEquals(1, jobExecution.getStepExecutions().size());
-        assertEquals(BatchStatus.COMPLETED, jobExecution.getStepExecutions().iterator().next().getStatus());
+		JobExecution restartedExecution = jobOperator.restart(failedExecution);
 
-        int countAfterInsert = JdbcTestUtils.countRowsInTable(jdbcTemplate, "ncmmis_provider");
-        assertEquals(1000, countAfterInsert);
+		assertEquals(BatchStatus.COMPLETED, restartedExecution.getStatus());
+		assertEquals(1000, JdbcTestUtils.countRowsInTable(jdbcTemplate, "ncmmis_provider"));
 	}
-
 }
