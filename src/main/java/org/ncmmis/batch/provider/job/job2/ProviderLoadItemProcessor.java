@@ -8,7 +8,8 @@ public class ProviderLoadItemProcessor implements ItemProcessor<Provider, Provid
 	@Override
 	public Provider process(Provider provider) throws Exception {
 	
-		// System.out.println("Processing provider id: " + provider.getId());
+		// Business logic goes here
+		
 		return provider;
 	}
 }
