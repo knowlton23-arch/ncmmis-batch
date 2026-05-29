@@ -31,3 +31,22 @@ For example:
 `java -Dspring.profiles.active=local -jar ncmmis-batch-1.0.jar org.ncmmis.batch.provider.job.job1.ProviderJob1 start job1 name=Jeff,java.lang.String`
 
 
+## ProviderJob3 restart demo
+
+`ProviderJob3` is an instructional Spring Batch restartability job.
+
+It reads the provider CSV, writes to `ncmmis_provider`, intentionally fails while processing provider id `350` during the first execution, and can then be restarted from the last committed chunk.
+
+Start the job:
+
+`java -Dspring.profiles.active=local -jar target/ncmmis-batch-1.0.jar org.ncmmis.batch.provider.job.job3.ProviderJob3 start job3 demoRun=restart-demo-1,java.lang.String`
+
+After the intentional failure, restart the failed execution by execution id:
+
+`java -Dspring.profiles.active=local -jar target/ncmmis-batch-1.0.jar org.ncmmis.batch.provider.job.job3.ProviderJob3 restart <job-execution-id>`
+
+With the current chunk size of `100`, the first failed run should commit `300` provider rows before failing. The restart should continue from the last committed chunk and complete the remaining rows.
+
+Use a new `demoRun` value for each fresh demonstration, or reset the Spring Batch metadata before reusing the same value.
+
+

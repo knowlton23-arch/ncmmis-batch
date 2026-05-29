@@ -4,33 +4,34 @@ Update this file after every meaningful implementation change.
 
 ## Current Phase
 
-- [e.g. Not started / In progress / Complete]
+- In progress
 
 ## Current Goal
 
-- [What you are building right now]
+- Add instructional Spring Batch jobs and tests that demonstrate core batch concepts.
 
 ## Completed
 
-- None yet.
+- Added `ProviderJob3` as a restartability demo job.
+- Added a focused H2-backed restart test for `ProviderJob3`.
 
 ## In Progress
 
-- None yet.
+- Validate `ProviderJob3` from Eclipse or Maven once the local Maven wrapper issue is resolved.
 
 ## Next Up
 
-- [First unit to build]
+- Consider adding a short README section for each available job.
 
 ## Open Questions
 
-- [Any unresolved product or technical decisions]
+- Decide whether restart demos should continue reusing `ncmmis_provider` or eventually move to dedicated instructional tables.
 
 ## Architecture Decisions
 
-- [Decisions made that affect the system design or
-  data model — include why the decision was made]
+- `ProviderJob3` intentionally reuses `ncmmis_provider` so restart behavior is visible without adding another business table.
+- `ProviderJob3` omits `RunIdIncrementer` so a failed job instance can be restarted with the same identifying parameters.
 
 ## Session Notes
 
-- [Context needed to resume work in the next session]
+- The first `ProviderJob3` execution fails at provider id `350`, after three chunks have committed. A restart should resume from the last committed chunk and finish the load.
