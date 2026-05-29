@@ -1,5 +1,6 @@
-CREATE TABLE IF NOT EXISTS ncmmis_provider
-(
+DROP TABLE IF EXISTS ncmmis_provider;
+
+CREATE TABLE ncmmis_provider (
     id integer NOT NULL,
     npi bigint NOT NULL,
     last_name varchar(255),

@@ -1,8 +1,8 @@
 -- Table: public.ncmmis_provider
 
--- DROP TABLE IF EXISTS public.ncmmis_provider;
+-- DROP TABLE IF EXISTS ncmmis_provider;
 
-CREATE TABLE IF NOT EXISTS public.ncmmis_provider
+CREATE TABLE IF NOT EXISTS ncmmis_provider
 (
     id integer NOT NULL,
     npi bigint NOT NULL,
@@ -15,5 +15,5 @@ CREATE TABLE IF NOT EXISTS public.ncmmis_provider
 
 TABLESPACE pg_default;
 
-ALTER TABLE IF EXISTS public.ncmmis_provider
+ALTER TABLE IF EXISTS ncmmis_provider
     OWNER to postgres;
