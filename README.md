@@ -24,10 +24,10 @@ The Maven Spring Boot plugin (configured in `pom.xml`) explicitly sets the execu
 
 The intended command shape is as follows:
 
-`java -jar target/ncmmis-batch-1.0.jar <job-config-class> start <job-name> [job-parameters]`
+`java -Dspring.profiles.active=<env> -jar target/ncmmis-batch-1.0.jar <job-config-class> start <job-name> [job-parameters]`
 
 For example:
 
-`java -jar ncmmis-batch-1.0.jar org.ncmmis.batch.provider.job.job1.ProviderJob1 start job1 name=Jeff,java.lang.String`
+`java -Dspring.profiles.active=local -jar ncmmis-batch-1.0.jar org.ncmmis.batch.provider.job.job1.ProviderJob1 start job1 name=Jeff,java.lang.String`
 
 
