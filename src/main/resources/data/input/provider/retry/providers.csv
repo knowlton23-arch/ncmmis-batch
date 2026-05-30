@@ -1,0 +1,5 @@
+id,npi,last_name,first_name,ssn,email
+601,1234567890,Smith,Jane,111-22-3333,jane.smith@example.com
+602,1234567891,RetryMe,Bob,222-33-4444,bob.retry@example.com
+603,1234567892,Rivera,Riley,333-44-5555,riley.rivera@example.com
+604,1234567893,Moore,Morgan,444-55-6666,morgan.moore@example.com

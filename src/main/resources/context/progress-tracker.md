@@ -22,6 +22,8 @@ Update this file after every meaningful implementation change.
 - Added a focused H2-backed skip test that asserts read, filter, process-skip, write, and database counts.
 - Renamed the filtering demo classes, package, beans, and input folder to use `filter` terminology.
 - Removed generic step and chunk listeners from the filter and skip demos to keep those lessons focused.
+- Added `ProviderRetryDemoJob` as a fault-tolerant retry demo job for transient process failures.
+- Added a focused H2-backed retry test that asserts successful retry, no skips, and full database writes.
 
 ## In Progress
 
@@ -30,7 +32,7 @@ Update this file after every meaningful implementation change.
 ## Next Up
 
 - Consider adding a short README section for each available job.
-- Consider adding `ProviderRetryDemoJob` to demonstrate retry behavior for transient processing failures.
+- Consider adding a conditional-flow demo job.
 
 ## Open Questions
 
