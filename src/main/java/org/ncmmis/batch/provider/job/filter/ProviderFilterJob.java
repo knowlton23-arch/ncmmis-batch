@@ -2,9 +2,7 @@ package org.ncmmis.batch.provider.job.filter;
 
 import javax.sql.DataSource;
 
-import org.ncmmis.batch.common.CustomChunkListener;
 import org.ncmmis.batch.common.CustomJobExecutionListener;
-import org.ncmmis.batch.common.CustomStepExecutionListener;
 import org.ncmmis.batch.config.BatchInfrastructureConfig;
 import org.ncmmis.batch.provider.entity.Provider;
 import org.ncmmis.batch.provider.entity.ProviderFieldSetMapper;
@@ -52,9 +50,7 @@ public class ProviderFilterJob {
 			JdbcTransactionManager transactionManager,
 	        ItemReader<Provider> providerFilterItemReader,
 	        ProviderFilterItemProcessor providerFilterItemProcessor,
-	        ItemWriter<Provider> providerFilterItemWriter,
-	        CustomStepExecutionListener stepExecutionListener,
-	        CustomChunkListener<Provider, Provider> chunkListener) {
+	        ItemWriter<Provider> providerFilterItemWriter) {
 
 		return new StepBuilder("providerFilterStep", jobRepository)
 			.<Provider, Provider>chunk(100)
@@ -62,8 +58,6 @@ public class ProviderFilterJob {
 			.reader(providerFilterItemReader)
 			.processor(providerFilterItemProcessor)
 			.writer(providerFilterItemWriter)
-			.listener(stepExecutionListener)
-			.listener(chunkListener)
 			.build();
 	}
 

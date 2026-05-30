@@ -21,6 +21,7 @@ Update this file after every meaningful implementation change.
 - Added `ProviderSkipDemoJob` as a fault-tolerant process-skip demo job.
 - Added a focused H2-backed skip test that asserts read, filter, process-skip, write, and database counts.
 - Renamed the filtering demo classes, package, beans, and input folder to use `filter` terminology.
+- Removed generic step and chunk listeners from the filter and skip demos to keep those lessons focused.
 
 ## In Progress
 

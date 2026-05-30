@@ -2,9 +2,7 @@ package org.ncmmis.batch.provider.job.skip;
 
 import javax.sql.DataSource;
 
-import org.ncmmis.batch.common.CustomChunkListener;
 import org.ncmmis.batch.common.CustomJobExecutionListener;
-import org.ncmmis.batch.common.CustomStepExecutionListener;
 import org.ncmmis.batch.config.BatchInfrastructureConfig;
 import org.ncmmis.batch.provider.entity.Provider;
 import org.ncmmis.batch.provider.entity.ProviderFieldSetMapper;
@@ -53,9 +51,7 @@ public class ProviderSkipDemoJob {
 	        ItemReader<Provider> providerSkipDemoItemReader,
 	        ProviderSkipDemoItemProcessor providerSkipDemoItemProcessor,
 	        ItemWriter<Provider> providerSkipDemoItemWriter,
-	        ProviderSkipDemoSkipListener providerSkipDemoSkipListener,
-	        CustomStepExecutionListener stepExecutionListener,
-	        CustomChunkListener<Provider, Provider> chunkListener) {
+	        ProviderSkipDemoSkipListener providerSkipDemoSkipListener) {
 
 		return new StepBuilder("providerSkipDemoStep", jobRepository)
 			.<Provider, Provider>chunk(100)
@@ -67,8 +63,6 @@ public class ProviderSkipDemoJob {
 			.skip(ProviderSkipDemoException.class)
 			.skipLimit(10)
 			.listener(providerSkipDemoSkipListener)
-			.listener(stepExecutionListener)
-			.listener(chunkListener)
 			.build();
 	}
 
