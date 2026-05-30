@@ -18,6 +18,8 @@ Update this file after every meaningful implementation change.
 - Added `ProviderValidationJob` as a validation/filtering demo job with invalid-but-readable input records.
 - Added a focused H2-backed validation test that asserts read, filter, write, and database counts.
 - Renamed provider input data folders from numbered job names to semantic package-aligned names.
+- Added `ProviderSkipDemoJob` as a fault-tolerant process-skip demo job.
+- Added a focused H2-backed skip test that asserts read, filter, process-skip, write, and database counts.
 
 ## In Progress
 
@@ -26,7 +28,7 @@ Update this file after every meaningful implementation change.
 ## Next Up
 
 - Consider adding a short README section for each available job.
-- Consider adding `ProviderSkipDemoJob` to contrast filtering business-invalid records with fault-tolerant exception skipping.
+- Consider adding `ProviderRetryDemoJob` to demonstrate retry behavior for transient processing failures.
 
 ## Open Questions
 

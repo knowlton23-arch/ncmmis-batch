@@ -1,0 +1,6 @@
+id,npi,last_name,first_name,ssn,email
+501,1234567890,Smith,Jane,111-22-3333,jane.smith@example.com
+502,1234567891,SkipMe,Bob,222-33-4444,bob.skip@example.com
+503,1234567892,Rivera,Riley,333-44-5555,riley.rivera@example.com
+504,1234567893,SkipMe,Alice,444-55-6666,alice.skip@example.com
+505,1234567894,Moore,Morgan,555-66-7777,morgan.moore@example.com
