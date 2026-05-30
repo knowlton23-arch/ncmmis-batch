@@ -17,6 +17,7 @@ Update this file after every meaningful implementation change.
 - Added a focused H2-backed restart test for `ProviderRestartDemoJob`.
 - Added `ProviderValidationJob` as a validation/filtering demo job with invalid-but-readable input records.
 - Added a focused H2-backed validation test that asserts read, filter, write, and database counts.
+- Renamed provider input data folders from numbered job names to semantic package-aligned names.
 
 ## In Progress
 

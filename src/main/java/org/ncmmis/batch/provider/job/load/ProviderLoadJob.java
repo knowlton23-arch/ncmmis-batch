@@ -72,7 +72,7 @@ public class ProviderLoadJob {
 	FlatFileItemReader<Provider> providerFileItemReader() {		
 		return new FlatFileItemReaderBuilder<Provider>()
 			.name("providerFileItemReader")
-			.resource(new ClassPathResource("data/input/provider/job2/providers.csv"))
+			.resource(new ClassPathResource("data/input/provider/load/providers.csv"))
 			.delimited()
 			.names("id", "npi", "lastName", "firstName", "ssn", "email")
 			.linesToSkip(1)

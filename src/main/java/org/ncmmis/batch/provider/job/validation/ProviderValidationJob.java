@@ -71,7 +71,7 @@ public class ProviderValidationJob {
 	FlatFileItemReader<Provider> providerValidationItemReader() {
 		return new FlatFileItemReaderBuilder<Provider>()
 			.name("providerValidationItemReader")
-			.resource(new ClassPathResource("data/input/provider/job4/providers.csv"))
+			.resource(new ClassPathResource("data/input/provider/validation/providers.csv"))
 			.delimited()
 			.names("id", "npi", "lastName", "firstName", "ssn", "email")
 			.linesToSkip(1)
