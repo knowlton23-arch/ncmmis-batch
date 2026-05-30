@@ -1,4 +1,4 @@
-package org.ncmmis.batch.provider.job.validation;
+package org.ncmmis.batch.provider.job.filter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,28 +21,28 @@ import org.springframework.test.jdbc.JdbcTestUtils;
 
 @SpringBatchTest
 @SpringJUnitConfig({
-    ProviderValidationJob.class,
+    ProviderFilterJob.class,
     TestDataSourceConfig.class
 })
 @Sql(scripts = {
     "/sql/schemas/schema-batch-h2.sql",
     "/sql/schemas/schema-provider-h2.sql"
 })
-public class ProviderValidationJobTests {
+public class ProviderFilterJobTests {
 
     private final JobOperator jobOperator;
     private final Job job;
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    ProviderValidationJobTests(JobOperator jobOperator, Job job, DataSource dataSource) {
+    ProviderFilterJobTests(JobOperator jobOperator, Job job, DataSource dataSource) {
         this.jobOperator = jobOperator;
         this.job = job;
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
 	@Test
-	public void testLaunchProviderValidationJob() throws Exception {
+	public void testLaunchProviderFilterJob() throws Exception {
 
         JobExecution jobExecution = jobOperator.start(job, new JobParameters());
         StepExecution stepExecution = jobExecution.getStepExecutions().iterator().next();

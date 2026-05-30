@@ -1,4 +1,4 @@
-package org.ncmmis.batch.provider.job.validation;
+package org.ncmmis.batch.provider.job.filter;
 
 import javax.sql.DataSource;
 
@@ -28,50 +28,50 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.support.JdbcTransactionManager;
 
-@Configuration("providerValidationJobConfig")
+@Configuration("providerFilterJobConfig")
 @Import(BatchInfrastructureConfig.class)
 @PropertySource("classpath:sql/provider-sql.properties")
-public class ProviderValidationJob {
+public class ProviderFilterJob {
 
 	@Bean
-	Job providerValidationJob(
+	Job providerFilterJob(
 			JobRepository jobRepository,
-			Step providerValidationStep,
+			Step providerFilterStep,
 			CustomJobExecutionListener jobExecutionListener) {
 
 		return new JobBuilder(jobRepository)
-				.start(providerValidationStep)
+				.start(providerFilterStep)
 				.incrementer(new RunIdIncrementer())
 				.listener(jobExecutionListener)
 				.build();
 	}
 
 	@Bean
-	Step providerValidationStep(
+	Step providerFilterStep(
 			JobRepository jobRepository,
 			JdbcTransactionManager transactionManager,
-	        ItemReader<Provider> providerValidationItemReader,
-	        ProviderValidationItemProcessor providerValidationItemProcessor,
-	        ItemWriter<Provider> providerValidationItemWriter,
+	        ItemReader<Provider> providerFilterItemReader,
+	        ProviderFilterItemProcessor providerFilterItemProcessor,
+	        ItemWriter<Provider> providerFilterItemWriter,
 	        CustomStepExecutionListener stepExecutionListener,
 	        CustomChunkListener<Provider, Provider> chunkListener) {
 
-		return new StepBuilder("providerValidationStep", jobRepository)
+		return new StepBuilder("providerFilterStep", jobRepository)
 			.<Provider, Provider>chunk(100)
 			.transactionManager(transactionManager)
-			.reader(providerValidationItemReader)
-			.processor(providerValidationItemProcessor)
-			.writer(providerValidationItemWriter)
+			.reader(providerFilterItemReader)
+			.processor(providerFilterItemProcessor)
+			.writer(providerFilterItemWriter)
 			.listener(stepExecutionListener)
 			.listener(chunkListener)
 			.build();
 	}
 
 	@Bean
-	FlatFileItemReader<Provider> providerValidationItemReader() {
+	FlatFileItemReader<Provider> providerFilterItemReader() {
 		return new FlatFileItemReaderBuilder<Provider>()
-			.name("providerValidationItemReader")
-			.resource(new ClassPathResource("data/input/provider/validation/providers.csv"))
+			.name("providerFilterItemReader")
+			.resource(new ClassPathResource("data/input/provider/filter/providers.csv"))
 			.delimited()
 			.names("id", "npi", "lastName", "firstName", "ssn", "email")
 			.linesToSkip(1)
@@ -80,12 +80,12 @@ public class ProviderValidationJob {
 	}
 
 	@Bean
-	ProviderValidationItemProcessor providerValidationItemProcessor() {
-		return new ProviderValidationItemProcessor();
+	ProviderFilterItemProcessor providerFilterItemProcessor() {
+		return new ProviderFilterItemProcessor();
 	}
 
 	@Bean
-	JdbcBatchItemWriter<Provider> providerValidationItemWriter(
+	JdbcBatchItemWriter<Provider> providerFilterItemWriter(
 			DataSource dataSource,
 			@Value("${provider.insert}") String sql) {
 

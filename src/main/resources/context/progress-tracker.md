@@ -15,11 +15,12 @@ Update this file after every meaningful implementation change.
 - Renamed the instructional jobs to semantic names: `HelloWorldJob`, `ProviderLoadJob`, and `ProviderRestartDemoJob`.
 - Added `ProviderRestartDemoJob` as a restartability demo job.
 - Added a focused H2-backed restart test for `ProviderRestartDemoJob`.
-- Added `ProviderValidationJob` as a validation/filtering demo job with invalid-but-readable input records.
-- Added a focused H2-backed validation test that asserts read, filter, write, and database counts.
+- Added `ProviderFilterJob` as a filtering demo job with invalid-but-readable input records.
+- Added a focused H2-backed filter test that asserts read, filter, write, and database counts.
 - Renamed provider input data folders from numbered job names to semantic package-aligned names.
 - Added `ProviderSkipDemoJob` as a fault-tolerant process-skip demo job.
 - Added a focused H2-backed skip test that asserts read, filter, process-skip, write, and database counts.
+- Renamed the filtering demo classes, package, beans, and input folder to use `filter` terminology.
 
 ## In Progress
 

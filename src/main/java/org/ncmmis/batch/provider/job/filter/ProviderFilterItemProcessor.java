@@ -1,13 +1,13 @@
-package org.ncmmis.batch.provider.job.validation;
+package org.ncmmis.batch.provider.job.filter;
 
 import org.ncmmis.batch.provider.entity.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.infrastructure.item.ItemProcessor;
 
-public class ProviderValidationItemProcessor implements ItemProcessor<Provider, Provider> {
+public class ProviderFilterItemProcessor implements ItemProcessor<Provider, Provider> {
 
-	private static final Logger log = LoggerFactory.getLogger(ProviderValidationItemProcessor.class);
+	private static final Logger log = LoggerFactory.getLogger(ProviderFilterItemProcessor.class);
 	private static final long MIN_TEN_DIGIT_NUMBER = 1_000_000_000L;
 	private static final long MAX_TEN_DIGIT_NUMBER = 9_999_999_999L;
 
