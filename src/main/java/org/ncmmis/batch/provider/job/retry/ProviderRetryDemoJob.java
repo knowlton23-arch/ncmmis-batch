@@ -51,7 +51,7 @@ public class ProviderRetryDemoJob {
 	        ItemReader<Provider> providerRetryDemoItemReader,
 	        ProviderRetryDemoItemProcessor providerRetryDemoItemProcessor,
 	        ItemWriter<Provider> providerRetryDemoItemWriter,
-	        ProviderRetryDemoRetryListener providerRetryDemoRetryListener) {
+	        ProviderRetryDemoListener providerRetryDemoListener) {
 
 		return new StepBuilder("providerRetryDemoStep", jobRepository)
 			.<Provider, Provider>chunk(100)
@@ -62,7 +62,7 @@ public class ProviderRetryDemoJob {
 			.faultTolerant()
 			.retry(ProviderRetryDemoException.class)
 			.retryLimit(3)
-			.retryListener(providerRetryDemoRetryListener)
+			.retryListener(providerRetryDemoListener)
 			.build();
 	}
 
@@ -84,8 +84,8 @@ public class ProviderRetryDemoJob {
 	}
 
 	@Bean
-	ProviderRetryDemoRetryListener providerRetryDemoRetryListener() {
-		return new ProviderRetryDemoRetryListener();
+	ProviderRetryDemoListener providerRetryDemoListener() {
+		return new ProviderRetryDemoListener();
 	}
 
 	@Bean

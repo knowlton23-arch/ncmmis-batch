@@ -8,9 +8,9 @@ import org.springframework.core.retry.RetryPolicy;
 import org.springframework.core.retry.RetryState;
 import org.springframework.core.retry.Retryable;
 
-public class ProviderRetryDemoRetryListener implements RetryListener {
+public class ProviderRetryDemoListener implements RetryListener {
 
-	private static final Logger log = LoggerFactory.getLogger(ProviderRetryDemoRetryListener.class);
+	private static final Logger log = LoggerFactory.getLogger(ProviderRetryDemoListener.class);
 
 	@Override
 	public void onRetryFailure(RetryPolicy retryPolicy, Retryable<?> retryable, Throwable throwable) {
