@@ -1,0 +1,11 @@
+id,npi,last_name,first_name,ssn,email
+401,1234567890,Smith,Jane,111-22-3333,jane.smith@example.com
+402,123456789,ShortNpi,Bob,222-33-4444,bob.short@example.com
+403,1234567891,,MissingLast,333-44-5555,missing.last@example.com
+404,1234567892,BadEmail,Alice,444-55-6666,not-an-email
+405,1234567893,Valid,Victor,555-66-7777,victor.valid@example.com
+406,1234567894,MissingSsn,Sam,,sam.missing@example.com
+407,1234567895,Casey,Chris,777-88-9999,chris.casey@example.com
+408,1234567896,BlankFirst,,888-99-0000,blank.first@example.com
+409,1234567897,Rivera,Riley,999-00-1111,riley.rivera@example.com
+410,1234567898,Moore,Morgan,000-11-2222,morgan.moore@example.com

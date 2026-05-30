@@ -15,6 +15,8 @@ Update this file after every meaningful implementation change.
 - Renamed the instructional jobs to semantic names: `HelloWorldJob`, `ProviderLoadJob`, and `ProviderRestartDemoJob`.
 - Added `ProviderRestartDemoJob` as a restartability demo job.
 - Added a focused H2-backed restart test for `ProviderRestartDemoJob`.
+- Added `ProviderValidationJob` as a validation/filtering demo job with invalid-but-readable input records.
+- Added a focused H2-backed validation test that asserts read, filter, write, and database counts.
 
 ## In Progress
 
@@ -23,6 +25,7 @@ Update this file after every meaningful implementation change.
 ## Next Up
 
 - Consider adding a short README section for each available job.
+- Consider adding `ProviderSkipDemoJob` to contrast filtering business-invalid records with fault-tolerant exception skipping.
 
 ## Open Questions
 
