@@ -41,7 +41,7 @@ public class ProviderRestartDemoJobTests {
     }
 
 	@Test
-	public void testRestartProviderRestartDemoJobFromLastCommittedChunk() throws Exception {
+	public void testRestartDemoJob() throws Exception {
 		JobExecution failedExecution = jobOperator.start(job, new JobParameters());
 
 		assertEquals(BatchStatus.FAILED, failedExecution.getStatus());
