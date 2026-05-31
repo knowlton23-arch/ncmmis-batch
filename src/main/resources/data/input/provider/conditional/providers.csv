@@ -1,0 +1,5 @@
+id,npi,last_name,first_name,ssn,email
+801,1801000001,Evans,Emery,111-11-1801,eemery@example.com
+802,1801000002,Foster,Finley,111-11-1802,ffinley@example.com
+803,1801000003,Garcia,Gray,111-11-1803,ggray@example.com
+804,1801000004,Harris,Harper,111-11-1804,hharper@example.com

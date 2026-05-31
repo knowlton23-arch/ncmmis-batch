@@ -27,6 +27,8 @@ Update this file after every meaningful implementation change.
 - Added `ProviderMultiStepJob` as a sequential multi-step demo with cleanup, load, and summary steps.
 - Added a focused H2-backed multi-step test that asserts all three steps complete, stale rows are removed, and loaded provider counts match the input.
 - Added a README job catalog with concepts, config classes, job names, input files, expected results, and sample commands for all available instructional jobs.
+- Added `ProviderConditionalFlowJob` as a conditional-flow demo that routes to either a load branch or an empty-input branch based on `inputMode`.
+- Added a focused H2-backed conditional-flow test that asserts both the valid and empty branches execute only their expected steps.
 
 ## In Progress
 
@@ -34,7 +36,7 @@ Update this file after every meaningful implementation change.
 
 ## Next Up
 
-- Consider adding a conditional-flow demo job.
+- Consider the next instructional Spring Batch concept to demonstrate.
 
 ## Open Questions
 
@@ -44,6 +46,7 @@ Update this file after every meaningful implementation change.
 
 - `ProviderRestartDemoJob` intentionally reuses `ncmmis_provider` so restart behavior is visible without adding another business table.
 - `ProviderRestartDemoJob` omits `RunIdIncrementer` so a failed job instance can be restarted with the same identifying parameters.
+- `ProviderConditionalFlowJob` omits `RunIdIncrementer` so `inputMode` remains an explicit identifying parameter that controls branch selection.
 
 ## Session Notes
 

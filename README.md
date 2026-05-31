@@ -137,3 +137,22 @@ Concept: sequential multi-step execution using a cleanup tasklet, chunk-oriented
 Start the job:
 
 `java -Dspring.profiles.active=local -jar target/ncmmis-batch-1.0.jar org.ncmmis.batch.provider.job.multistep.ProviderMultiStepJob start providerMultiStepJob demoRun=multistep-demo-1,java.lang.String`
+
+
+### ProviderConditionalFlowJob
+
+Concept: conditional job routing based on a custom step exit status.
+
+- Config class: `org.ncmmis.batch.provider.job.conditional.ProviderConditionalFlowJob`
+- Job name: `providerConditionalFlowJob`
+- Input file: `data/input/provider/conditional/providers.csv`
+- Expected valid result: `inputMode=valid` routes through the load branch and writes `4` provider rows to `ncmmis_provider`.
+- Expected empty result: `inputMode=empty` routes through the empty branch, skips loading, and completes with `0` provider rows written.
+
+Start the valid branch:
+
+`java -Dspring.profiles.active=local -jar target/ncmmis-batch-1.0.jar org.ncmmis.batch.provider.job.conditional.ProviderConditionalFlowJob start providerConditionalFlowJob inputMode=valid,java.lang.String demoRun=conditional-valid-demo-1,java.lang.String`
+
+Start the empty branch:
+
+`java -Dspring.profiles.active=local -jar target/ncmmis-batch-1.0.jar org.ncmmis.batch.provider.job.conditional.ProviderConditionalFlowJob start providerConditionalFlowJob inputMode=empty,java.lang.String demoRun=conditional-empty-demo-1,java.lang.String`
