@@ -26,6 +26,7 @@ Update this file after every meaningful implementation change.
 - Added a focused H2-backed retry test that asserts successful retry, no skips, and full database writes.
 - Added `ProviderMultiStepJob` as a sequential multi-step demo with cleanup, load, and summary steps.
 - Added a focused H2-backed multi-step test that asserts all three steps complete, stale rows are removed, and loaded provider counts match the input.
+- Added a README job catalog with concepts, config classes, job names, input files, expected results, and sample commands for all available instructional jobs.
 
 ## In Progress
 
@@ -33,7 +34,6 @@ Update this file after every meaningful implementation change.
 
 ## Next Up
 
-- Consider adding a short README section for each available job.
 - Consider adding a conditional-flow demo job.
 
 ## Open Questions
