@@ -13,18 +13,18 @@ public class ProviderRetryDemoListener implements RetryListener {
 	private static final Logger log = LoggerFactory.getLogger(ProviderRetryDemoListener.class);
 
 	@Override
-	public void onRetryFailure(RetryPolicy retryPolicy, Retryable<?> retryable, Throwable throwable) {
-		log.info("Retryable failure: {}", throwable.getMessage());
-	}
-
-	@Override
 	public void beforeRetry(RetryPolicy retryPolicy, Retryable<?> retryable, RetryState retryState) {
 		log.info("Retrying after {} failed attempt(s).", retryState.getRetryCount());
 	}
-
+	
 	@Override
 	public void onRetrySuccess(RetryPolicy retryPolicy, Retryable<?> retryable, Object result) {
 		log.info("Retry completed successfully.");
+	}
+	
+	@Override
+	public void onRetryFailure(RetryPolicy retryPolicy, Retryable<?> retryable, Throwable throwable) {
+		log.info("Retryable failure: {}", throwable.getMessage());
 	}
 
 	@Override
