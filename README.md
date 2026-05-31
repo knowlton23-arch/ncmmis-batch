@@ -1,28 +1,20 @@
-## How to build
+## Quick Start
 
-Bash:
+This is a command-line Spring Batch app. The executable jar uses Spring Batch's `CommandLineJobOperator` as its entry point.
 
-`./mvnw clean package`
-
-Windows:
+Build on Windows:
 
 `.\mvnw.cmd clean package`
+
+Build on Bash:
+
+`./mvnw clean package`
 
 When using Eclipse IDE, the built jar is created here:
 
 `${project_loc:ncmmis-batch}/target/ncmmis-batch-1.0.jar`
 
-
-## How to run
-
-Note that this is not a normal long-running Spring Boot app.
-This is a command-line Spring Batch application that runs discrete batch jobs.
-
-The runtime entry point is Spring Batch's CommandLineJobOperator.
-
-The Maven Spring Boot plugin, configured in `pom.xml`, explicitly sets the executable main class to `org.springframework.batch.core.launch.support.CommandLineJobOperator`.
-
-The intended command shape is as follows:
+To run a job:
 
 `java -Dspring.profiles.active=<env> -jar target/ncmmis-batch-1.0.jar <job-config-class> start <job-name> [job-parameters]`
 
@@ -32,6 +24,13 @@ For example:
 
 Most provider jobs write to `ncmmis_provider`. When rerunning demos against a persistent database, reset the table or use demo jobs that intentionally clean up their own data.
 
+## JUnit Tests
+
+Each available job has a focused JUnit test that shows the expected Spring Batch status, step counts, and database effects. These tests are run against an in-memory H2 database, therefore no manual cleanup necessary.
+
+These tests will automatically run with a Maven `clean package`.
+
+You can also step through the tests individually, using (for example) Eclipse IDE.
 
 ## Available Jobs
 

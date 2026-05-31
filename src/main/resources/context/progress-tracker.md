@@ -30,6 +30,7 @@ Update this file after every meaningful implementation change.
 - Added `ProviderConditionalFlowJob` as a conditional-flow demo that routes to either a load branch or an empty-input branch based on `inputMode`.
 - Added a focused H2-backed conditional-flow test that asserts both the valid and empty branches execute only their expected steps.
 - Added a Mermaid flowchart to the README for the `ProviderConditionalFlowJob` branch paths.
+- Condensed the README build/run guidance into a shorter Quick Start section.
 
 ## In Progress
 
