@@ -24,6 +24,8 @@ Update this file after every meaningful implementation change.
 - Removed generic step and chunk listeners from the filter and skip demos to keep those lessons focused.
 - Added `ProviderRetryDemoJob` as a fault-tolerant retry demo job for transient process failures.
 - Added a focused H2-backed retry test that asserts successful retry, no skips, and full database writes.
+- Added `ProviderMultiStepJob` as a sequential multi-step demo with cleanup, load, and summary steps.
+- Added a focused H2-backed multi-step test that asserts all three steps complete, stale rows are removed, and loaded provider counts match the input.
 
 ## In Progress
 

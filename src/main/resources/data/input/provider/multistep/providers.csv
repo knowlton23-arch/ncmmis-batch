@@ -1,0 +1,5 @@
+id,npi,last_name,first_name,ssn,email
+701,1701000001,Adams,Avery,111-11-1701,aavery@example.com
+702,1701000002,Bennett,Bailey,111-11-1702,bbailey@example.com
+703,1701000003,Clark,Casey,111-11-1703,cclark@example.com
+704,1701000004,Diaz,Drew,111-11-1704,ddrew@example.com
