@@ -143,6 +143,14 @@ Start the job:
 
 Concept: conditional job routing based on a custom step exit status.
 
+```mermaid
+flowchart TD
+    A["Validate Input"] --> B{"ExitStatus?"}
+    B -->|"VALID_DATA"| C["Load Providers"]
+    C --> D["Loaded Summary"]
+    B -->|"EMPTY_DATA"| E["Empty Summary"]
+```
+
 - Config class: `org.ncmmis.batch.provider.job.conditional.ProviderConditionalFlowJob`
 - Job name: `providerConditionalFlowJob`
 - Input file: `data/input/provider/conditional/providers.csv`

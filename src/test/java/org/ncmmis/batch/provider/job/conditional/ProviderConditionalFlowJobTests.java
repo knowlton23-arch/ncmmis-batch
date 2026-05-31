@@ -49,7 +49,7 @@ public class ProviderConditionalFlowJobTests {
     }
 
 	@Test
-	public void testLaunchProviderConditionalFlowJobWithValidInput() throws Exception {
+	public void testLaunchWithValidInput() throws Exception {
 
 		JobExecution jobExecution = jobOperator.start(job, jobParameters("valid"));
         Map<String, StepExecution> stepExecutions = stepExecutionsByName(jobExecution);
@@ -77,7 +77,7 @@ public class ProviderConditionalFlowJobTests {
 	}
 
 	@Test
-	public void testLaunchProviderConditionalFlowJobWithEmptyInput() throws Exception {
+	public void testLaunchWithEmptyInput() throws Exception {
 
 		JobExecution jobExecution = jobOperator.start(job, jobParameters("empty"));
         Map<String, StepExecution> stepExecutions = stepExecutionsByName(jobExecution);
